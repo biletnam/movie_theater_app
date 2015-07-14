@@ -20,6 +20,13 @@ body {
   padding-top: $font-size-h1;
 }
 
+.movie-app-page-header {
+  background-size: cover;
+  background-position: center;
+  padding-top: $font-size-h1;
+  border-bottom: 4px solid $brand-primary;
+}
+
 .date {
   padding: ($font-size-h2 * 1.5) $font-size-h2;
   background-color: $brand-light-gray;

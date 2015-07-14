@@ -1,26 +1,72 @@
-<div class="page-header">
-  <%= link_to showings_path, class: 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Back
-  <% end %>
-  <%= link_to edit_showing_path(@showing), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Edit
-  <% end %>
-  <h1>Show showing</h1>
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="movie-app-page-header">
+      <h1>Checkout</h1>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="row">
+      <div class="col-md-2">
+        <%= image_tag @showing.movie.image_url, height: 150 %>
+        <h4>
+          <strong><%= @showing.movie.name %></strong>
+        </h4>
+        <h5><%= @showing.time_slot.strftime('%b %d at %I:%M %p') %></h5>
+        <h5><%= @showing.screening_room.movie_theater.name %></h5>
+        <h5>Theater #<%= @showing.screening_room.theater_number %></h5>
+
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">How many tickets would you like?</h3>
+          </div>
+          <div class="panel-body">
+            <% @showing.screening_room.movie_theater.ticket_types.each do |ticket_type| %>
+            <div class="row">
+              <div class="col-xs-12 col-md-6 text-center">
+                <p>
+                  <strong><%= ticket_type.ticket_type %></strong>
+                </p>
+                <p><%= number_to_currency(ticket_type.price) %> x</p>
+              </div>
+              <div class="col-xs-12 col-md-6 text-center">
+                <p>
+                  <strong>Quantity</strong>
+                </p>
+              </div>
+            </div>
+            <hr/>
+            <% end %>
+          </div>
+
+          <ul class="list-group">
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Purchase</h3>
+          </div>
+          <div class="panel-body">
+            <h2 class="no-margin-top">
+              <small>Total </small>
+            </h2>
+            <h2 class="no-margin-top">
+              $12.65
+            </h2>
+            <hr/>
+            <%= link_to new_booking_url, class: "btn btn-lg btn-block time-button" do %>
+              Checkout
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Time slot:</dt>
-  <dd><%= @showing.time_slot %></dd>
-
-  <dt>Seats available:</dt>
-  <dd><%= @showing.seats_available %></dd>
-
-  <dt>Screening room:</dt>
-  <dd><%= @showing.screening_room_id %></dd>
-
-  <dt>Movie:</dt>
-  <dd><%= @showing.movie_id %></dd>
-
-</dl>

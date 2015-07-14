@@ -1,9 +1,44 @@
-<div class="page-header">
-  <%= link_to bookings_path, class: 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Back
-  <% end %>
-  <h1>New booking</h1>
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="movie-app-page-header">
+      <h1>Payment Details</h1>
+    </div>
+  </div>
 </div>
+<br>
 
-<%= render 'form' %>
+<%= form_for(@booking, html: { class: "form", role: "form" }) do |f| %>
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Payment Details</h3>
+          </div>
+          <div class="panel-body">
+            <%= render 'form', :f => f %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Purchase</h3>
+          </div>
+          <div class="panel-body">
+            <h2 class="no-margin-top">
+              <small>Total </small>
+            </h2>
+            <h2 class="no-margin-top">
+              $12.65
+            </h2>
+            <hr/>
+            <%= f.submit "Complete Purchase", class: "btn btn-lg time-button" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
