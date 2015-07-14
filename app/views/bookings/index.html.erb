@@ -1,0 +1,43 @@
+<div class="page-header">
+  <%= link_to new_booking_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Booking
+  <% end %>
+  <h1>Listing bookings</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Cc number</th>
+            <th>Cc cvc</th>
+            <th>Cc exp mon</th>
+            <th>Cc exp yr</th>
+            <th>Buyer age confirmed</th>
+            <th>Total cost</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @bookings) do |booking| %>
+            <td><%= booking.name %></td>
+            <td><%= booking.email %></td>
+            <td><%= booking.cc_number %></td>
+            <td><%= booking.cc_cvc %></td>
+            <td><%= booking.cc_exp_mon %></td>
+            <td><%= booking.cc_exp_yr %></td>
+            <td><%= booking.buyer_age_confirmed %></td>
+            <td><%= booking.total_cost %></td>
+            <td><%= link_to 'Show', booking %></td>
+        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
+        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  cc_number: MyString
+  cc_cvc: MyString
+  cc_exp_mon: MyString
+  cc_exp_yr: MyString
+  buyer_age_confirmed: false
+  total_cost: MyString
+
+two:
+  name: MyString
+  email: MyString
+  cc_number: MyString
+  cc_cvc: MyString
+  cc_exp_mon: MyString
+  cc_exp_yr: MyString
+  buyer_age_confirmed: false
+  total_cost: MyString

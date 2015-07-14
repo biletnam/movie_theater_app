@@ -1,0 +1,33 @@
+<div class="page-header">
+  <%= link_to new_screening_room_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Screening room
+  <% end %>
+  <h1>Listing screening_rooms</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Theater number</th>
+            <th>Seat quantity</th>
+            <th>Movie theater</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @screening_rooms) do |screening_room| %>
+            <td><%= screening_room.theater_number %></td>
+            <td><%= screening_room.seat_quantity %></td>
+            <td><%= screening_room.movie_theater_id %></td>
+            <td><%= link_to 'Show', screening_room %></td>
+        <td><%= link_to 'Edit', edit_screening_room_path(screening_room) %></td>
+        <td><%= link_to 'Destroy', screening_room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

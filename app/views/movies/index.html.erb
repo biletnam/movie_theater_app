@@ -1,0 +1,41 @@
+<div class="page-header">
+  <%= link_to new_movie_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Movie
+  <% end %>
+  <h1>Listing movies</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Image url</th>
+            <th>Length in minutes</th>
+            <th>Genre</th>
+            <th>Description</th>
+            <th>Actors</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @movies) do |movie| %>
+            <td><%= movie.name %></td>
+            <td><%= movie.rating %></td>
+            <td><%= movie.image_url %></td>
+            <td><%= movie.length_in_minutes %></td>
+            <td><%= movie.genre %></td>
+            <td><%= movie.description %></td>
+            <td><%= movie.actors %></td>
+            <td><%= link_to 'Show', movie %></td>
+        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
+        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

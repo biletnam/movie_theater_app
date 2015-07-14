@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time_slot: 2015-07-13 17:47:09
+  seats_available: false
+  screening_room_id: 1
+  movie_id: 1
+
+two:
+  time_slot: 2015-07-13 17:47:09
+  seats_available: false
+  screening_room_id: 1
+  movie_id: 1

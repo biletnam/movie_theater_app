@@ -1,0 +1,41 @@
+<div class="page-header">
+  <%= link_to new_movie_theater_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Movie theater
+  <% end %>
+  <h1>Listing movie_theaters</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Address 1</th>
+            <th>Address 2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Phone</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @movie_theaters) do |movie_theater| %>
+            <td><%= movie_theater.name %></td>
+            <td><%= movie_theater.address_1 %></td>
+            <td><%= movie_theater.address_2 %></td>
+            <td><%= movie_theater.city %></td>
+            <td><%= movie_theater.state %></td>
+            <td><%= movie_theater.zip %></td>
+            <td><%= movie_theater.phone %></td>
+            <td><%= link_to 'Show', movie_theater %></td>
+        <td><%= link_to 'Edit', edit_movie_theater_path(movie_theater) %></td>
+        <td><%= link_to 'Destroy', movie_theater, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
