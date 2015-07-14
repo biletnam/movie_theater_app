@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="page-header">
+    <h1>Manage Your Theater</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">General Information</h3>
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item"><%= @movie_theater.name %></li>
+        <li class="list-group-item">
+          <%= @movie_theater.address_1 %>
+          <% if @movie_theater.address_2.present? %>
+          , <%= @movie_theater.address_2 %>
+          <% end %>
+        </li>
+        <li class="list-group-item">
+          <%= @movie_theater.city %>, <%= @movie_theater.state %> <%= @movie_theater.zip %>
+        </li>
+        <li class="list-group-item">
+          <%= @movie_theater.phone %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Screening Rooms</h3>
+      </div>
+
+      <ul class="list-group">
+        <% @movie_theater.screening_rooms.each do |room| %>
+        <li class="list-group-item">
+          Theater #<%= room.theater_number %> | <%= room.seat_quantity %> seat capacity
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Types of Tickets</h3>
+      </div>
+      <ul class="list-group">
+        <% @movie_theater.ticket_types.each do |ticket| %>
+        <li class="list-group-item">
+          <%= ticket.ticket_type %> | <%= number_to_currency(ticket.price) %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Current Movies</h3>
+      </div>
+      <div class="panel-body">
+        Panel content
+      </div>
+    </div>
+  </div>
+</div>
+

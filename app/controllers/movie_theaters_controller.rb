@@ -1,5 +1,9 @@
 class MovieTheatersController < ApplicationController
-  before_action :set_movie_theater, only: [:show, :edit, :update, :destroy]
+  before_action :set_movie_theater, only: [:edit, :update, :destroy, :dashboard]
+
+  def dashboard
+
+  end
 
   # GET /movie_theaters
   # GET /movie_theaters.json
@@ -10,6 +14,8 @@ class MovieTheatersController < ApplicationController
   # GET /movie_theaters/1
   # GET /movie_theaters/1.json
   def show
+    @movie_theater = MovieTheater.first
+    @upcoming_dates = (Time.now.to_date..(Time.now + 6.days)).map{ |date| date }
   end
 
   # GET /movie_theaters/new
