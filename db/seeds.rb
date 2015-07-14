@@ -58,17 +58,21 @@ ScreeningRoom.all.each do |room|
   end
 end
 
-Ticket.destroy_all
-Ticket.create!( :ticket_type => "General Admission",
-                :price => 9.50,
-                :movie_theater_id => MovieTheater.first.id)
+TicketOffering.destroy_all
+TicketOffering.create!( :name => "General Admission",
+                        :price => 9.50,
+                        :movie_theater_id => MovieTheater.first.id)
+
+TicketOffering.create!( :name => "Children",
+                        :price => 6.50,
+                        :movie_theater_id => MovieTheater.first.id)
 
 
 theater_count = MovieTheater.count
 sr_count = ScreeningRoom.count
 movies_count = Movie.count
 showings_count = Showing.count
-tickets_count = Ticket.count
+tickets_count = TicketOffering.count
 
 puts "#{theater_count} movie theaters were created"
 puts "#{sr_count} screening rooms were created"

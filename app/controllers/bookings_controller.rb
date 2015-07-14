@@ -15,6 +15,9 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @tickets = params[:ticket]
+    @showing_id = params[:showing_id]
+
     @months =[  ["Jan (01)", "01"],
                 ["Feb (02)", "02"],
                 ["Mar (03)", "03"],
@@ -48,9 +51,9 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
-
     respond_to do |format|
       if @booking.save
+        @booking.create_tickets(params[:tickets], params[:showing_id])
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
@@ -92,6 +95,7 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:name, :email, :cc_number, :cc_cvc, :cc_exp_mon, :cc_exp_yr, :buyer_age_confirmed, :total_cost)
+      params.require(:booking).permit(:name, :email, :cc_number, :cc_cvc, :cc_exp_mon,
+                                      :cc_exp_yr, :buyer_age_confirmed, :total_cost, :tickets)
     end
 end

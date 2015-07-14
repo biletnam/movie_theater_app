@@ -1,6 +1,6 @@
 class MovieTheater < ActiveRecord::Base
   has_many :screening_rooms
-  has_many :ticket_types, :foreign_key => :movie_theater_id, :class_name => "Ticket"
+  has_many :ticket_offerings
   has_many :showings, :through => :screening_rooms
 
   def movies

@@ -51,9 +51,9 @@
         <h3 class="panel-title">Types of Tickets</h3>
       </div>
       <ul class="list-group">
-        <% @movie_theater.ticket_types.each do |ticket| %>
+        <% @movie_theater.ticket_offerings.each do |ticket| %>
         <li class="list-group-item">
-          <%= ticket.ticket_type %> | <%= number_to_currency(ticket.price) %>
+          <%= ticket.name %> | <%= number_to_currency(ticket.price) %>
         </li>
         <% end %>
       </ul>

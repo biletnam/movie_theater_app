@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :ticket_offerings
+
   resources :bookings
 
   root to: "movie_theaters#show"
