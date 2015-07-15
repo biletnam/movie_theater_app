@@ -2,6 +2,7 @@ class Showing < ActiveRecord::Base
   default_scope { order('time_slot ASC') }
 
   belongs_to :screening_room
+  belongs_to :movie_theater, :through => :screening_room
   has_many :tickets
 
   def amount_of_seats_remaining
