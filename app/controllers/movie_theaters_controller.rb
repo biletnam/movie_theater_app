@@ -1,34 +1,44 @@
 class MovieTheatersController < ApplicationController
-  before_action :set_movie_theater, only: [:edit, :update, :destroy, :dashboard]
+  before_action :set_movie_theater, only: [:edit, :update, :destroy, :dashboard, :sales_dashboard]
 
   def dashboard
-
   end
 
-  # GET /movie_theaters
-  # GET /movie_theaters.json
+  def sales_dashboard
+    if params[:movie_filter].present?
+      @bookings = @movie_theater.bookings.where(:movie_id => params[:movie_filter]).page params[:page]
+    else
+      @bookings = @movie_theater.bookings.page params[:page]
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def index
     @movie_theaters = MovieTheater.all
   end
 
-  # GET /movie_theaters/1
-  # GET /movie_theaters/1.json
   def show
+    # FOR TESTING PURPOSES WILL ALWAYS USE FIRST
     @movie_theater = MovieTheater.first
+
+    @day = params[:day] || Date.today
     @upcoming_dates = (Time.now.to_date..(Time.now + 6.days)).map{ |date| date }
+    @showings = @movie_theater.showings.where(:date => @day)
+    @movies = Movie.find(@showings.pluck(:movie_id))
+
   end
 
-  # GET /movie_theaters/new
   def new
     @movie_theater = MovieTheater.new
   end
 
-  # GET /movie_theaters/1/edit
   def edit
   end
 
-  # POST /movie_theaters
-  # POST /movie_theaters.json
   def create
     @movie_theater = MovieTheater.new(movie_theater_params)
 
@@ -43,8 +53,6 @@ class MovieTheatersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /movie_theaters/1
-  # PATCH/PUT /movie_theaters/1.json
   def update
     respond_to do |format|
       if @movie_theater.update(movie_theater_params)
@@ -57,8 +65,6 @@ class MovieTheatersController < ApplicationController
     end
   end
 
-  # DELETE /movie_theaters/1
-  # DELETE /movie_theaters/1.json
   def destroy
     @movie_theater.destroy
     respond_to do |format|

@@ -1,7 +1,12 @@
 <div class="row">
   <div class="col-xs-12 col-md-10 col-md-offset-1">
     <div class="movie-app-page-header">
-      <h1>Manage Your Theater</h1>
+      <h1>
+        Manage Your Theater
+        <%= link_to sales_information_path(@movie_theater), class: 'btn time-button pull-right' do %>
+          View Sales Information
+        <% end %>
+      </h1>
     </div>
   </div>
 </div>

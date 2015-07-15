@@ -1,11 +1,11 @@
-<% movie.showings.each do |showing| %>
-  <% if showing.time_slot.day == Date.today.day && showing.seats_available == true %>
+<% @showings.where(:movie_id => movie.id).each do |showing| %>
+  <% if showing.seats_available? %>
 
     <%= link_to showing, class: "btn btn-lg time-button" do %>
       <%= showing.time_slot.strftime('%I:%M %p') %>
     <% end %>
 
-  <% elsif showing.time_slot.day == Date.today.day && showing.seats_available == false %>
+  <% else %>
 
     <%= link_to showing, class: "btn btn-lg time-button", disabled: "disabled" do %>
       <%= showing.time_slot.strftime('%I:%M %p') %>

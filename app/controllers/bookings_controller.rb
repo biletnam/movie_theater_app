@@ -20,11 +20,13 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
+    @booking.showing_id = @showing_id
 
     respond_to do |format|
       if @booking.save
         @booking.create_tickets(@tickets, @showing_id)
         @booking.set_total_cost
+        @booking.set_movie_id
         BookingMailer.receipt(@booking).deliver_now
         format.html { redirect_to @booking }
         format.json { render :show, status: :created, location: @booking }

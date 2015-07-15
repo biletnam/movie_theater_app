@@ -1,0 +1,93 @@
+body {
+  font-family: $font-family-base !important;
+}
+
+.navbar.navbar-default {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.no-margin-top {
+  margin-top: 0px !important;
+  border: none;
+  box-shadow: none;
+}
+
+.movie-theater-landing {
+  height: 30vh;
+  background-size: cover;
+  color: white;
+  background-position: center;
+  padding-top: $font-size-h1;
+  background-image: url(<%= asset_path 'movie_theatre.jpg' %>)
+}
+
+.movie-app-page-header {
+  background-size: cover;
+  background-position: center;
+  padding-top: $font-size-h1;
+  border-bottom: 4px solid $brand-primary;
+}
+
+
+.date {
+  padding: ($font-size-h2 * 1.5) $font-size-h4;
+  color: $gray-light;
+  background-color: $brand-light-gray;
+
+  a {
+    color: inherit;
+  }
+
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.date:hover {
+  text-decoration: none !important;
+  border-top: 4px solid $brand-primary;
+  color: $text-color;
+}
+
+.active {
+  background-color: $brand-light-gray;
+  border-top: 4px solid $brand-primary;
+  color: $text-color;
+}
+
+.movie-row {
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  padding: 10px;
+  margin-top: $font-size-h2;
+}
+
+.time-button {
+  background-color: $brand-primary;
+  color: white;
+  font-weight: 600 !important;
+  margin-top: 4px;
+}
+
+.sales-info-box {
+  border-left: 4px solid $brand-primary;
+  padding: 5px 15px;
+
+  .sales-type {
+    opacity: .6;
+  }
+
+  .sales-number {
+    margin-top: 4px;
+    font-weight: 300;
+    font-size: 54px;
+  }
+}
+
+.footer {
+  background-color: $brand-light-gray;
+  width: 100%;
+  padding: 40px 0;
+  margin-top: 25px;
+}
