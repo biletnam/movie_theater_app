@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">How many tickets would you like?</h3>
+  </div>
+  <div class="panel-body">
+    <% @showing.screening_room.movie_theater.ticket_offerings.each do |ticket_type| %>
+    <div class="row">
+      <div class="col-xs-12 col-md-6 text-center">
+        <p>
+          <strong><%= ticket_type.name %></strong>
+        </p>
+        <p><%= number_to_currency(ticket_type.price) %> x</p>
+      </div>
+      <div class="col-xs-12 col-md-6 text-center">
+        <p>
+          <strong>Quantity</strong>
+        </p>
+        <p>
+        <div class="form-group text-center">
+          <%= select_tag "tickets[#{ticket_type.id}]", options_for_select(0..@showing.amount_of_seats_remaining), {:class => 'form-control'} %>
+        </div>
+        </p>
+      </div>
+    </div>
+    <hr/>
+    <% end %>
+  </div>
+</div>

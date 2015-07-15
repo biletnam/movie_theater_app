@@ -1,38 +1,19 @@
-<div class="page-header">
-  <%= link_to bookings_path, class: 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Back
-  <% end %>
-  <%= link_to edit_booking_path(@booking), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Edit
-  <% end %>
-  <h1>Show booking</h1>
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="movie-app-page-header">
+      <h1>Enjoy <%= @booking.movie.name %>!</h1>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <h3>Confirmation Number: <%= @booking.id %></h3>
+    <h4>
+      Thank you so much for purchasing tickets online! A copy of this receipt is being emailed to <%= @booking.email %>.
+    </h4>
+    <h4>The total amount being charged to your card is <%= number_to_currency(@booking.set_total_cost) %></h4>
+  </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Name:</dt>
-  <dd><%= @booking.name %></dd>
-
-  <dt>Email:</dt>
-  <dd><%= @booking.email %></dd>
-
-  <dt>Cc number:</dt>
-  <dd><%= @booking.cc_number %></dd>
-
-  <dt>Cc cvc:</dt>
-  <dd><%= @booking.cc_cvc %></dd>
-
-  <dt>Cc exp mon:</dt>
-  <dd><%= @booking.cc_exp_mon %></dd>
-
-  <dt>Cc exp yr:</dt>
-  <dd><%= @booking.cc_exp_yr %></dd>
-
-  <dt>Buyer age confirmed:</dt>
-  <dd><%= @booking.buyer_age_confirmed %></dd>
-
-  <dt>Total cost:</dt>
-  <dd><%= @booking.total_cost %></dd>
-
-</dl>

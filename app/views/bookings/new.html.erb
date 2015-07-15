@@ -2,7 +2,6 @@
   <div class="col-xs-12 col-md-10 col-md-offset-1">
     <div class="movie-app-page-header">
       <h1>Payment Details</h1>
-      <%= @tickets.first %>
     </div>
   </div>
 </div>
@@ -12,39 +11,38 @@
   <% @tickets.each do |k,v| %>
     <%= hidden_field_tag "tickets[#{k}]", v %>
   <% end %>
-  <%= hidden_field_tag "movie_theater_id", @movie_theater_id %>
   <%= hidden_field_tag "showing_id", @showing_id %>
-  <div class="row">
-    <div class="col-xs-12 col-md-10 col-md-offset-1">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Payment Details</h3>
-            </div>
-            <div class="panel-body">
-              <%= render 'form', :f => f %>
-            </div>
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Payment Details</h3>
+          </div>
+          <div class="panel-body">
+            <%= render 'form', :f => f %>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Purchase</h3>
-            </div>
-            <div class="panel-body">
-              <h2 class="no-margin-top">
-                <small>Total </small>
-              </h2>
-              <h2 class="no-margin-top">
-                $12.65
-              </h2>
-              <hr/>
-              <%= f.submit "Complete Purchase", class: "btn btn-lg time-button" %>
-            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Purchase</h3>
+          </div>
+          <div class="panel-body">
+            <h2 class="no-margin-top">
+              <small>Total </small>
+            </h2>
+            <h2 class="no-margin-top">
+              $12.65
+            </h2>
+            <hr/>
+            <%= f.submit "Complete Purchase", class: "btn btn-lg time-button" %>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 <% end %>
