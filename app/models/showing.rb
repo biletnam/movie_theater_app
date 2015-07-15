@@ -16,4 +16,11 @@ class Showing < ActiveRecord::Base
     Movie.find(self.movie_id)
   end
 
+  def check_seat_availability
+    if self.amount_of_seats_remaining <= 0
+      self.seats_available = false
+      self.save
+    end
+  end
+
 end

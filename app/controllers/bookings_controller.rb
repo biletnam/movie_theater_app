@@ -1,30 +1,23 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :create_tickets_array, only: [:new, :create]
+  before_action :set_tickets_and_showing, only: [:new, :create]
   before_action :set_months_years_arrays, only: [:new, :create]
+  before_action :check_ticket_quantity, only: [:new, :create]
 
-  # GET /bookings
-  # GET /bookings.json
   def index
     @bookings = Booking.all
   end
 
-  # GET /bookings/1
-  # GET /bookings/1.json
   def show
   end
 
-  # GET /bookings/new
   def new
     @booking = Booking.new
   end
 
-  # GET /bookings/1/edit
   def edit
   end
 
-  # POST /bookings
-  # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
 
@@ -32,6 +25,7 @@ class BookingsController < ApplicationController
       if @booking.save
         @booking.create_tickets(@tickets, @showing_id)
         @booking.set_total_cost
+        BookingMailer.receipt(@booking).deliver_now
         format.html { redirect_to @booking }
         format.json { render :show, status: :created, location: @booking }
       else
@@ -41,8 +35,6 @@ class BookingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /bookings/1
-  # PATCH/PUT /bookings/1.json
   def update
     respond_to do |format|
       if @booking.update(booking_params)
@@ -56,8 +48,6 @@ class BookingsController < ApplicationController
     end
   end
 
-  # DELETE /bookings/1
-  # DELETE /bookings/1.json
   def destroy
     @booking.destroy
     respond_to do |format|
@@ -67,12 +57,10 @@ class BookingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
       params.require(:booking).permit(:name, :email, :cc_number, :cc_cvc, :cc_exp_mon,
                                       :cc_exp_yr, :buyer_age_confirmed, :total_cost, :tickets, :showing_id)
@@ -103,9 +91,16 @@ class BookingsController < ApplicationController
             ["2023","2023"]]
     end
 
-
-    def create_tickets_array
+    def set_tickets_and_showing
       @tickets = params[:tickets]
       @showing_id = params[:showing_id]
+    end
+
+    def check_ticket_quantity
+      unless Showing.find(@showing_id).amount_of_seats_remaining >= @tickets.values.map(&:to_i).sum
+        redirect_to :back, :notice => "Sorry you are trying to purchase more tickets than we have seats remaining, please modify your order."
+      end
+      rescue ActionController::RedirectBackError
+        redirect_to root_path
     end
 end

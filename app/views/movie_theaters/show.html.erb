@@ -44,13 +44,7 @@
         <p><%= movie.description %></p>
         <p><em><%= movie.actors %></em></p>
         <hr/>
-        <% movie.showings.each do |showing| %>
-          <% if showing.time_slot.day == Date.today.day %>
-            <%= link_to showing, class: "btn btn-lg time-button" do %>
-              <%= showing.time_slot.strftime('%I:%M %p') %>
-            <% end %>
-          <% end %>
-        <% end %>
+        <%= render 'showings/available_showings_buttons', :movie => movie %>
         </div>
       </div>
     </div>

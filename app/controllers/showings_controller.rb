@@ -1,5 +1,6 @@
 class ShowingsController < ApplicationController
-  before_action :set_showing, only: [:show, :edit, :update, :destroy]
+  before_action :set_showing, only: [:show, :edit, :update, :destroy, :confirm_tickets_available]
+  before_action :confirm_tickets_available, only: [:show]
 
   # GET /showings
   # GET /showings.json
@@ -70,5 +71,13 @@ class ShowingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def showing_params
       params.require(:showing).permit(:time_slot, :seats_available, :screening_room_id, :movie_id)
+    end
+
+    def confirm_tickets_available
+      unless @showing.amount_of_seats_remaining > 0
+        redirect_to :back, :notice => "Sorry this show is sold out!"
+      end
+      rescue ActionController::RedirectBackError
+        redirect_to root_path
     end
 end

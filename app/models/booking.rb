@@ -12,12 +12,24 @@ class Booking < ActiveRecord::Base
         )
       end
     end
-
-    return @tickets
+    adjust_showing_seating
   end
 
   def movie
     self.tickets.first.showing.movie
+  end
+
+  def adjust_showing_seating
+    puts self.tickets.first.showing
+    self.tickets.first.showing.check_seat_availability
+  end
+
+  def ticket_type_hash
+    ticket_types = Hash.new 0
+    self.tickets.each do |ticket|
+      ticket_types[ticket.ticket_offering.name] += 1
+    end
+    return ticket_types
   end
 
   def set_total_cost

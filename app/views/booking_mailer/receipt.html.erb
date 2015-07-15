@@ -1,0 +1,19 @@
+<h2>We hope you enjoy the movie!</h2>
+
+<p>
+  This email is a confirmation of recent purchase to go see <%= @booking.movie.name %>. Your confirmation number is <%= @booking.id %>.
+</p>
+
+<p>
+  The total amount charged to your card is <%= number_to_currency(@booking.total_cost) %>.
+</p>
+
+<p>
+  You purchased:
+  <ul>
+    <% @booking.ticket_type_hash.each do |k,v| %>
+        <li><%= "#{v} #{k} tickets" %></li>
+    <% end %>
+  </ul>
+</p>
+

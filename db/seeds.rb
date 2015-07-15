@@ -17,7 +17,7 @@ MovieTheater.create!( :name => "Movie Theater for LaunchPad Lab Friend",
 ScreeningRoom.destroy_all
 6.times do |n|
   ScreeningRoom.create!(:theater_number => n + 1,
-                        :seat_quantity => rand(100),
+                        :seat_quantity => rand(1..100),
                         :movie_theater_id => MovieTheater.first.id)
 end
 
