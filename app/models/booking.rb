@@ -8,8 +8,9 @@ class Booking < ActiveRecord::Base
   validates_presence_of :name, :email, :cc_cvc
   validate :cc_format
   validate :cc_expiration_date
+  validate :buyer_aged_confirmed
 
-  before_save :set_total_cost, :set_movie_id, :set_last_4_digits
+  before_save :set_movie_id, :set_last_4_digits
 
   def create_tickets(tickets, showing_id)
     tickets.each do |k,v|
@@ -21,6 +22,8 @@ class Booking < ActiveRecord::Base
         )
       end
     end
+    adjust_showing_seating
+    set_total_cost
   end
 
   def adjust_showing_seating
@@ -41,7 +44,7 @@ class Booking < ActiveRecord::Base
       total_cost += ticket.ticket_offering.price
     end
     self.total_cost = total_cost
-    return total_cost
+    self.save(:validate => false)
   end
 
   def set_movie_id
@@ -66,6 +69,12 @@ class Booking < ActiveRecord::Base
 
     unless exp_date.to_i > Date.today.strftime("%Y%m").to_i
       errors.add(:cc_exp_yr, "Credit card is expired. Please use a different card.")
+    end
+  end
+
+  def buyer_aged_confirmed
+    if self.showing.movie.rating == "R" && self.buyer_age_confirmed == false
+      errors.add(:buyer_age_confirmed, "This movie is rated R. You must confirm your age.")
     end
   end
 

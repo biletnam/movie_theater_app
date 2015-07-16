@@ -3,6 +3,7 @@ class BookingsController < ApplicationController
   before_action :set_tickets_and_showing, only: [:new, :create]
   before_action :set_months_years_arrays, only: [:new, :create]
   before_action :check_ticket_quantity, only: [:new, :create]
+  before_action :total_cost, only: [:new, :create]
 
   def index
     @bookings = Booking.all
@@ -22,10 +23,11 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.showing_id = @showing_id
 
+
+
     respond_to do |format|
       if @booking.save
         @booking.create_tickets(@tickets, @showing_id)
-        @booking.adjust_showing_seating
         BookingMailer.receipt(@booking).deliver_now
         format.html { redirect_to @booking }
         format.json { render :show, status: :created, location: @booking }
@@ -81,6 +83,7 @@ class BookingsController < ApplicationController
                 ["Nov (11)", "11"],
                 ["Dec (12)", "12"]
               ]
+
       @years =[["2015","2015"],
             ["2016","2016"],
             ["2017","2017"],
@@ -95,13 +98,26 @@ class BookingsController < ApplicationController
     def set_tickets_and_showing
       @tickets = params[:tickets]
       @showing_id = params[:showing_id]
+      @movie = Showing.find(@showing_id).movie
     end
 
     def check_ticket_quantity
-      unless Showing.find(@showing_id).amount_of_seats_remaining >= @tickets.values.map(&:to_i).sum
+      if Showing.find(@showing_id).amount_of_seats_remaining <= @tickets.values.map(&:to_i).sum
         redirect_to :back, :notice => "Sorry you are trying to purchase more tickets than we have seats remaining, please modify your order."
+      elsif @tickets.values.map(&:to_i).sum == 0
+        redirect_to :back, :notice => "You did not select any tickets."
       end
+
       rescue ActionController::RedirectBackError
         redirect_to root_path
+    end
+
+    def total_cost
+      @total_cost = 0
+
+      @tickets.each do |k,v|
+        ticket = TicketOffering.find(k)
+        @total_cost += (ticket.price * v.to_i)
+      end
     end
 end

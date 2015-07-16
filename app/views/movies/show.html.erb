@@ -1,35 +1,95 @@
-<div class="page-header">
-  <%= link_to movies_path, class: 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Back
-  <% end %>
-  <%= link_to edit_movie_path(@movie), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Edit
-  <% end %>
-  <h1>Show movie</h1>
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="movie-app-page-header">
+      <h1><%= @movie.name %></h1>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="row">
+      <div class="col-md-4">
+        <%= image_tag @movie.image_url, class: 'movie-poster' %>
+      </div>
+      <div class="col-md-8">
+        <h4>
+          <strong><%= @movie.name %> | <small>Rated <%= @movie.rating %></small></strong>
+        </h4>
+        <h5><%= @movie.length_in_minutes %> minutes</h5>
+        <h5><%= @movie.description %></h5>
+        <h5><%= @movie.actors %></h5>
+        <br>
+        <h3>Showtimes for Today</h3>
+        <hr/>
+        <div class="row">
+          <div class="col-xs-12">
+            <% @movie.showings.where(:date => Date.today).each do |showing| %>
+            <% if showing.seats_available? %>
+
+            <%= link_to showing, class: "btn btn-lg time-button" do %>
+            <%= showing.time_slot.strftime('%I:%M %p') %>
+            <% end %>
+
+            <% else %>
+
+            <%= link_to showing, class: "btn btn-lg time-button", disabled: "disabled" do %>
+            <%= showing.time_slot.strftime('%I:%M %p') %>
+            <% end %>
+
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <h3>
+              <small>
+                <%= link_to "View All Other Showtimes", '#', id: 'other-show-times-link', remote: true %>
+              </small>
+            </h3>
+            <div id="other-show-times">
+              <% @movie.showings.pluck(:date).uniq.each do |date| %>
+              <div class="row">
+                <div class="col-xs-12">
+                  <h3>
+                    <%= date.strftime('%A, %b-%e') %>
+                  </h3>
+                  <hr/>
+                  <% @movie.showings.where(:date => date).each do |showing| %>
+                    <% if showing.seats_available? %>
+
+                      <%= link_to showing, class: "btn btn-lg time-button" do %>
+                        <%= showing.time_slot.strftime('%I:%M %p') %>
+                      <% end %>
+
+                    <% else %>
+
+                      <%= link_to showing, class: "btn btn-lg time-button", disabled: "disabled" do %>
+                        <%= showing.time_slot.strftime('%I:%M %p') %>
+                      <% end %>
+
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <br>
+              <br>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Name:</dt>
-  <dd><%= @movie.name %></dd>
+<script>
+  $( document ).ready(function() {
+    $('#other-show-times-link').click(function() {
+      $('#other-show-times').slideToggle();
+    });
+  });
+</script>
 
-  <dt>Rating:</dt>
-  <dd><%= @movie.rating %></dd>
-
-  <dt>Image url:</dt>
-  <dd><%= @movie.image_url %></dd>
-
-  <dt>Length in minutes:</dt>
-  <dd><%= @movie.length_in_minutes %></dd>
-
-  <dt>Genre:</dt>
-  <dd><%= @movie.genre %></dd>
-
-  <dt>Description:</dt>
-  <dd><%= @movie.description %></dd>
-
-  <dt>Actors:</dt>
-  <dd><%= @movie.actors %></dd>
-
-</dl>

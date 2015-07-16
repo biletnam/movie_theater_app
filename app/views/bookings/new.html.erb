@@ -15,7 +15,10 @@
 <div class="row">
   <div class="col-xs-12 col-md-10 col-md-offset-1">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-2">
+          <%= render 'showings/movie_showing_information', :@showing => Showing.find(@showing_id) %>
+      </div>
+      <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Payment Details</h3>
@@ -31,11 +34,12 @@
             <h3 class="panel-title">Purchase</h3>
           </div>
           <div class="panel-body">
+            <%= render 'bookings/ticket_information', :@tickets => @tickets %>
             <h2 class="no-margin-top">
               <small>Total </small>
             </h2>
             <h2 class="no-margin-top">
-              $12.65
+              <span id="total-amount"><%= number_to_currency(@total_cost) %></span>
             </h2>
             <hr/>
             <%= f.submit "Complete Purchase", class: "btn btn-lg time-button" %>
@@ -46,3 +50,4 @@
   </div>
 </div>
 <% end %>
+

@@ -23,7 +23,9 @@
           <%= image_tag movie.image_url, class: 'img-responsive' %>
         </div>
         <div class="col-md-2">
-          <h2 class="no-margin-top"><%= movie.name.upcase %></h2>
+          <h2 class="no-margin-top">
+            <%= link_to movie.name.upcase, movie %>
+          </h2>
           <p>Rated: <%= movie.rating %></p>
           <p><%= movie.length_in_minutes %> minutes</p>
         </div>

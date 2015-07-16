@@ -1,0 +1,14 @@
+<ul class="list-group">
+  <% @tickets.each do |k,v| %>
+    <% ticket_type = TicketOffering.find(k) %>
+    <% unless v == "0" %>
+      <li class="list-group-item">
+        <h5><%= ticket_type.name %></h5>
+        <h4>
+          <%= v %> X <%= number_to_currency(ticket_type.price) %> =
+          <%= number_to_currency(ticket_type.price * v.to_i)  %>
+        </h4>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

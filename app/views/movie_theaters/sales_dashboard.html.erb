@@ -46,14 +46,14 @@
       <%= paginate @bookings %>
       <div class="col-md-4">
         <%= form_tag(  {:controller => :movie_theaters,
-                        :action => :sales_dashboard},
-                        :method => :get,
-                        class: 'form', :remote => true) do %>
+          :action => :sales_dashboard},
+          :method => :get,
+          class: 'form', :remote => true) do %>
 
-          <%= select_tag :movie_filter,
-          content_tag(:option,'All Movies',:value=>nil) +
-          options_from_collection_for_select(Movie.all,
-              'id', 'name'), {:class => 'form-control'} %>
+        <%= select_tag :movie_filter,
+        content_tag(:option,'All Movies',:value=>nil) +
+        options_from_collection_for_select(Movie.all,
+        'id', 'name'), {:class => 'form-control'} %>
         <% end %>
 
       </div>
@@ -74,25 +74,27 @@
 
         <tbody>
           <% @bookings.each_with_index do |booking, n| %>
+
           <tr>
             <td><%= n + 1 %></td>
             <td><%= booking.movie.name %></td>
             <td><%= booking.tickets.count %></td>
             <td><%= number_to_currency(booking.total_cost) %></td>
             <td><%= booking.email %></td>
-            <% end %>
           </tr>
+
+          <% end %>
         </tbody>
       </table>
       <%= paginate @bookings %>
     </div>
   </div>
 </div>
-<script type="text/javascript">
 
+<script type="text/javascript">
   $( document ).ready(function() {
     $('#movie_filter').change(function() {
-        this.form.submit();
+      this.form.submit();
     });
   });
 </script>
