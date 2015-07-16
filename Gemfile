@@ -7,6 +7,7 @@ gem 'bootstrap-generators', '~> 3.3.4'
 # https://github.com/FortAwesome/font-awesome-sass
 gem 'font-awesome-sass'
 gem "nested_form"
+gem 'credit_card_validator'
 
 gem 'faker'
 gem 'jquery-ui-rails'

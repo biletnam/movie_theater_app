@@ -1,9 +1,15 @@
+require 'credit_card_validator'
+
 class Booking < ActiveRecord::Base
   has_many :tickets
   belongs_to :showing
   belongs_to :movie
 
-  validates_presence_of :name, :email, :cc_number, :cc_cvc, :cc_exp_mon, :cc_exp_yr
+  validates_presence_of :name, :email, :cc_cvc
+  validate :cc_format
+  validate :cc_expiration_date
+
+  before_save :set_total_cost, :set_movie_id, :set_last_4_digits
 
   def create_tickets(tickets, showing_id)
     tickets.each do |k,v|
@@ -15,16 +21,10 @@ class Booking < ActiveRecord::Base
         )
       end
     end
-    adjust_showing_seating
-  end
-
-  def movie
-    self.tickets.first.showing.movie
   end
 
   def adjust_showing_seating
-    puts self.tickets.first.showing
-    self.tickets.first.showing.check_seat_availability
+    self.showing.check_seat_availability
   end
 
   def ticket_type_hash
@@ -41,13 +41,29 @@ class Booking < ActiveRecord::Base
       total_cost += ticket.ticket_offering.price
     end
     self.total_cost = total_cost
-    save
     return total_cost
   end
 
   def set_movie_id
-    self.movie_id = self.showing.movie_id
-    save
+    self.movie_id = showing.movie_id
+  end
+
+  def set_last_4_digits
+    self.cc_number = self.cc_number[-4..-1]
+  end
+
+  def cc_format
+    unless CreditCardValidator::Validator.valid?(self.cc_number)
+      errors.add(:cc_number, "Credit card number is not valid. Please re-enter")
+    end
+  end
+
+  def cc_expiration_date
+    exp_date = self.cc_exp_yr + self.cc_exp_mon
+
+    unless exp_date.to_i > Date.today.strftime("%Y%m").to_i
+      errors.add(:cc_exp_yr, "Credit card is expired. Please use a different card.")
+    end
   end
 
 end

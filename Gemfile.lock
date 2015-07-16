@@ -41,6 +41,7 @@ GEM
     autoprefixer-rails (5.2.1)
       execjs
       json
+    base_app (1.0.5)
     binding_of_caller (0.7.3.pre1)
       debug_inspector (>= 0.0.1)
     bootstrap-generators (3.3.4)
@@ -62,6 +63,8 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
+    credit_card_validator (1.2.0)
+      base_app (>= 1.0.5)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     erubis (2.7.0)
@@ -215,6 +218,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug (= 3.4.0)
   coffee-rails (= 4.1.0)
+  credit_card_validator
   faker
   font-awesome-sass
   guard-minitest (= 2.3.1)

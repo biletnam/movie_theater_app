@@ -25,8 +25,7 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.save
         @booking.create_tickets(@tickets, @showing_id)
-        @booking.set_total_cost
-        @booking.set_movie_id
+        @booking.adjust_showing_seating
         BookingMailer.receipt(@booking).deliver_now
         format.html { redirect_to @booking }
         format.json { render :show, status: :created, location: @booking }
