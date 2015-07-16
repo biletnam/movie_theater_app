@@ -3,6 +3,7 @@ class Showing < ActiveRecord::Base
 
   belongs_to :screening_room
   belongs_to :movie
+
   has_many :tickets
   has_many :bookings
 
@@ -14,10 +15,6 @@ class Showing < ActiveRecord::Base
 
   def tickets_sold
     self.tickets.count
-  end
-
-  def movie
-    Movie.find(self.movie_id)
   end
 
   def check_seat_availability

@@ -53,6 +53,9 @@ class Booking < ActiveRecord::Base
   end
 
   def cc_format
+    # just to use test numbers in production
+    CreditCardValidator::Validator.options[:test_numbers_are_valid] = true
+
     unless CreditCardValidator::Validator.valid?(self.cc_number)
       errors.add(:cc_number, "Credit card number is not valid. Please re-enter")
     end
