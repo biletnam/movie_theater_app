@@ -8,6 +8,7 @@ class Booking < ActiveRecord::Base
   belongs_to :movie
 
   validates_presence_of :name, :email, :cc_cvc
+  validates :email, :email => true
   validate :cc_format
   validate :cc_expiration_date
   validate :buyer_aged_confirmed

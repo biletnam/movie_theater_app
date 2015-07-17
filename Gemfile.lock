@@ -67,6 +67,8 @@ GEM
       base_app (>= 1.0.5)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
+    email_validator (1.6.0)
+      activemodel
     erubis (2.7.0)
     execjs (2.5.2)
     faker (1.4.3)
@@ -219,6 +221,7 @@ DEPENDENCIES
   byebug (= 3.4.0)
   coffee-rails (= 4.1.0)
   credit_card_validator
+  email_validator
   faker
   font-awesome-sass
   guard-minitest (= 2.3.1)
