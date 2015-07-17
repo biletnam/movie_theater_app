@@ -67,6 +67,8 @@ TicketOffering.create!( :name => "Children",
                         :price => 6.50,
                         :movie_theater_id => MovieTheater.first.id)
 
+Booking.destroy_all
+Ticket.destroy_all
 
 theater_count = MovieTheater.count
 sr_count = ScreeningRoom.count

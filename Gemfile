@@ -11,6 +11,7 @@ gem 'credit_card_validator'
 gem 'email_validator'
 
 gem 'rollbar', '~> 1.5.3'
+gem 'figaro'
 
 gem 'faker'
 gem 'jquery-ui-rails'
