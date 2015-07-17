@@ -5,20 +5,18 @@ class MovieTheatersController < ApplicationController
   end
 
   def sales_dashboard
-    if params[:movie_filter].present?
-      @bookings = @movie_theater.bookings.where(:movie_id => params[:movie_filter]).page params[:page]
+    if params[:movie_filter].present? && params[:movie_filter] != "All"
+      @movie_id = params[:movie_filter]
+      @bookings = @movie_theater.bookings.where(:movie_id => params[:movie_filter]).page(params[:page]).per(15)
     else
-      @bookings = @movie_theater.bookings.page params[:page]
+      @movie_id = "All"
+      @bookings = @movie_theater.bookings.page(params[:page]).per(15)
     end
 
     respond_to do |format|
       format.html
       format.js
     end
-  end
-
-  def index
-    @movie_theaters = MovieTheater.all
   end
 
   def show
@@ -29,11 +27,6 @@ class MovieTheatersController < ApplicationController
     @upcoming_dates = (Time.now.to_date..(Time.now + 6.days)).map{ |date| date }
     @showings = @movie_theater.showings.where(:date => @day)
     @movies = Movie.find(@showings.pluck(:movie_id))
-
-  end
-
-  def new
-    @movie_theater = MovieTheater.new
   end
 
   def edit
@@ -45,10 +38,10 @@ class MovieTheatersController < ApplicationController
     respond_to do |format|
       if @movie_theater.save
         format.html { redirect_to @movie_theater, notice: 'Movie theater was successfully created.' }
-        format.json { render :show, status: :created, location: @movie_theater }
+
       else
         format.html { render :new }
-        format.json { render json: @movie_theater.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -56,11 +49,9 @@ class MovieTheatersController < ApplicationController
   def update
     respond_to do |format|
       if @movie_theater.update(movie_theater_params)
-        format.html { redirect_to @movie_theater, notice: 'Movie theater was successfully updated.' }
-        format.json { render :show, status: :ok, location: @movie_theater }
+        format.html { redirect_to theater_dashboard_url(@movie_theater), notice: 'Movie theater was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @movie_theater.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,7 +60,6 @@ class MovieTheatersController < ApplicationController
     @movie_theater.destroy
     respond_to do |format|
       format.html { redirect_to movie_theaters_url, notice: 'Movie theater was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

@@ -3,8 +3,10 @@ body {
 }
 
 .navbar.navbar-default {
-  background-color: transparent;
-  border-color: transparent;
+  background-color: white;
+  border-radius: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  margin-bottom: 0;
 }
 
 .no-margin-top {
@@ -18,8 +20,10 @@ body {
   background-size: cover;
   color: white;
   background-position: center;
-  padding-top: $font-size-h1;
-  background-image: url(<%= asset_path 'movie_theatre.jpg' %>)
+  padding-top: $font-size-h1*1.5;
+  background-image: url(<%= asset_path 'movie_theatre.jpg' %>);
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 .movie-app-page-header {

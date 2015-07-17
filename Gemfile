@@ -8,6 +8,7 @@ gem 'bootstrap-generators', '~> 3.3.4'
 gem 'font-awesome-sass'
 gem "nested_form"
 gem 'credit_card_validator'
+gem 'email_validator'
 
 gem 'faker'
 gem 'jquery-ui-rails'

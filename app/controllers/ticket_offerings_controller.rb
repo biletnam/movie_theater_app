@@ -5,6 +5,7 @@ class TicketOfferingsController < ApplicationController
   # GET /ticket_offerings.json
   def index
     @ticket_offerings = TicketOffering.all
+    @ticket_offering = TicketOffering.new
   end
 
   # GET /ticket_offerings/1
@@ -28,11 +29,9 @@ class TicketOfferingsController < ApplicationController
 
     respond_to do |format|
       if @ticket_offering.save
-        format.html { redirect_to @ticket_offering, notice: 'Ticket offering was successfully created.' }
-        format.json { render :show, status: :created, location: @ticket_offering }
+        format.html { redirect_to ticket_offerings_url, notice: 'Ticket offering was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @ticket_offering.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +41,9 @@ class TicketOfferingsController < ApplicationController
   def update
     respond_to do |format|
       if @ticket_offering.update(ticket_offering_params)
-        format.html { redirect_to @ticket_offering, notice: 'Ticket offering was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ticket_offering }
+        format.html { redirect_to ticket_offerings_url, notice: 'Ticket offering was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @ticket_offering.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +54,6 @@ class TicketOfferingsController < ApplicationController
     @ticket_offering.destroy
     respond_to do |format|
       format.html { redirect_to ticket_offerings_url, notice: 'Ticket offering was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

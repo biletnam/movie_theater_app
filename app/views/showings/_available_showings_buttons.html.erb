@@ -1,5 +1,5 @@
 <% @showings.where(:movie_id => movie.id).each do |showing| %>
-  <% if showing.seats_available? %>
+  <% if showing.seats_available? && showing.time_slot > Time.now %>
 
     <%= link_to showing, class: "btn btn-lg time-button" do %>
       <%= showing.time_slot.strftime('%I:%M %p') %>

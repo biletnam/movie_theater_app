@@ -1,0 +1,6 @@
+<li class="list-group-item">
+  <%= ticket_offering.name %> | <%= number_to_currency(ticket_offering.price) %>
+  <%= link_to edit_ticket_offering_url(ticket_offering) do %>
+    <%= icon('fa fa-pencil pull-right') %>
+  <% end %>
+</li>

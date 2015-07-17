@@ -1,6 +1,8 @@
 require 'credit_card_validator'
 
 class Booking < ActiveRecord::Base
+  default_scope { order('created_at ASC') }
+
   has_many :tickets
   belongs_to :showing
   belongs_to :movie

@@ -5,6 +5,7 @@ class ScreeningRoomsController < ApplicationController
   # GET /screening_rooms.json
   def index
     @screening_rooms = ScreeningRoom.all
+    @screening_room = ScreeningRoom.new
   end
 
   # GET /screening_rooms/1
@@ -28,11 +29,9 @@ class ScreeningRoomsController < ApplicationController
 
     respond_to do |format|
       if @screening_room.save
-        format.html { redirect_to @screening_room, notice: 'Screening room was successfully created.' }
-        format.json { render :show, status: :created, location: @screening_room }
+        format.html { redirect_to screening_rooms_url, notice: 'Screening room was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @screening_room.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +41,9 @@ class ScreeningRoomsController < ApplicationController
   def update
     respond_to do |format|
       if @screening_room.update(screening_room_params)
-        format.html { redirect_to @screening_room, notice: 'Screening room was successfully updated.' }
-        format.json { render :show, status: :ok, location: @screening_room }
+        format.html { redirect_to screening_rooms_url, notice: 'Screening room was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @screening_room.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +54,6 @@ class ScreeningRoomsController < ApplicationController
     @screening_room.destroy
     respond_to do |format|
       format.html { redirect_to screening_rooms_url, notice: 'Screening room was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

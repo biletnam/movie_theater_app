@@ -1,43 +1,48 @@
-<div class="ignore-container row movie-theater-landing">
-  <div class="col-xs-12 col-md-10 col-md-offset-1">
-    <h1><%= @movie_theater.name %></h1>
-    <h4 class="contact-info">
-      <%= @movie_theater.address_1 %>, <%= @movie_theater.address_2 %>,
-      <%= @movie_theater.city %>, <%= @movie_theater.state %> <%= @movie_theater.zip %> |
-      <%= @movie_theater.phone %>
-    </h4>
+<div class="ignore-container movie-theater-landing">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-10 col-md-offset-1">
+        <h1><%= @movie_theater.name %></h1>
+        <h4 class="contact-info">
+          <%= @movie_theater.address_1 %>, <%= @movie_theater.address_2 %>,
+          <%= @movie_theater.city %>, <%= @movie_theater.state %> <%= @movie_theater.zip %> |
+          <%= @movie_theater.phone %>
+        </h4>
+      </div>
+    </div>
   </div>
 </div>
 <br>
-<div class="row">
-  <div class="col-xs-12 col-md-10 col-md-offset-1">
-    <%= render 'date_selection', :@upcoming_dates => @upcoming_dates %>
-  </div>
-</div>
 
-<div class="row">
-<% @movies.each do |movie| %>
-    <div class="movie-row col-xs-12 col-md-10 col-md-offset-1">
-      <div class="row">
-        <div class="col-md-2">
-          <%= image_tag movie.image_url, class: 'img-responsive' %>
-        </div>
-        <div class="col-md-2">
-          <h2 class="no-margin-top">
-            <%= link_to movie.name.upcase, movie %>
-          </h2>
-          <p>Rated: <%= movie.rating %></p>
-          <p><%= movie.length_in_minutes %> minutes</p>
-        </div>
-        <div class="col-md-8">
-        <p><%= movie.description %></p>
-        <p><em><%= movie.actors %></em></p>
-        <hr/>
-        <%= render 'showings/available_showings_buttons', :@showings => @showings, :movie => movie %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <%= render 'date_selection', :@upcoming_dates => @upcoming_dates %>
+    </div>
+  </div>
+
+  <div class="row">
+  <% @movies.each do |movie| %>
+      <div class="movie-row col-xs-12 col-md-10 col-md-offset-1">
+        <div class="row">
+          <div class="col-md-2">
+            <%= image_tag movie.image_url, class: 'img-responsive' %>
+          </div>
+          <div class="col-md-2">
+            <h2 class="no-margin-top">
+              <%= link_to movie.name.upcase, movie %>
+            </h2>
+            <p>Rated: <%= movie.rating %></p>
+            <p><%= movie.length_in_minutes %> minutes</p>
+          </div>
+          <div class="col-md-8">
+          <p><%= movie.description %></p>
+          <p><em><%= movie.actors %></em></p>
+          <hr/>
+          <%= render 'showings/available_showings_buttons', :@showings => @showings, :movie => movie %>
+          </div>
         </div>
       </div>
-    </div>
-<% end %>
+  <% end %>
+  </div>
 </div>
-
-

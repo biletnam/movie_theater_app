@@ -1,105 +1,106 @@
-<div class="row">
-  <div class="col-xs-12 col-md-10 col-md-offset-1">
-    <div class="movie-app-page-header">
-      <h1>
-        Manage Your Theater
-        <%= link_to sales_information_path(@movie_theater), class: 'btn time-button pull-right' do %>
-          View Sales Information
-        <% end %>
-      </h1>
-    </div>
-  </div>
-</div>
-<br>
-
-<div class="row">
-  <div class="col-xs-12 col-md-10 col-md-offset-1">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              General Information
-              <%= link_to edit_movie_theater_path(@movie_theater) do %>
-                <%= icon('fa fa-pencil pull-right') %>
-              <% end %>
-            </h3>
-          </div>
-
-          <ul class="list-group">
-            <li class="list-group-item"><%= @movie_theater.name %></li>
-            <li class="list-group-item">
-              <%= @movie_theater.address_1 %>
-              <% if @movie_theater.address_2.present? %>
-              , <%= @movie_theater.address_2 %>
-              <% end %>
-            </li>
-            <li class="list-group-item">
-              <%= @movie_theater.city %>, <%= @movie_theater.state %> <%= @movie_theater.zip %>
-            </li>
-            <li class="list-group-item">
-              <%= @movie_theater.phone %>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              Screening Rooms
-              <%= link_to edit_movie_theater_path(@movie_theater) do %>
-                <%= icon('fa fa-pencil pull-right') %>
-              <% end %>
-            </h3>
-          </div>
-
-          <ul class="list-group">
-            <% @movie_theater.screening_rooms.each do |room| %>
-            <li class="list-group-item">
-              Theater #<%= room.theater_number %> | <%= room.seat_quantity %> seat capacity
-            </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              Types of Tickets
-              <%= link_to edit_movie_theater_path(@movie_theater) do %>
-                <%= icon('fa fa-pencil pull-right') %>
-              <% end %>
-            </h3>
-          </div>
-          <ul class="list-group">
-            <% @movie_theater.ticket_offerings.each do |ticket| %>
-            <li class="list-group-item">
-              <%= ticket.name %> | <%= number_to_currency(ticket.price) %>
-            </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              Current Movies
-              <%= link_to edit_movie_theater_path(@movie_theater) do %>
-                <%= icon('fa fa-pencil pull-right') %>
-              <% end %>
-            </h3>
-          </div>
-          <div class="panel-body">
-            Panel content
-          </div>
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <div class="movie-app-page-header">
+        <h1>
+          Manage Your Theater
+          <%= link_to sales_information_path(@movie_theater), class: 'btn time-button pull-right' do %>
+            View Sales Information
+          <% end %>
+        </h1>
       </div>
     </div>
   </div>
-</div>
+  <br>
 
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                General Information
+                <%= link_to edit_movie_theater_path(@movie_theater) do %>
+                  <%= icon('fa fa-pencil pull-right') %>
+                <% end %>
+              </h3>
+            </div>
+
+            <ul class="list-group">
+              <li class="list-group-item"><%= @movie_theater.name %></li>
+              <li class="list-group-item">
+                <%= @movie_theater.address_1 %>
+                <% if @movie_theater.address_2.present? %>
+                , <%= @movie_theater.address_2 %>
+                <% end %>
+              </li>
+              <li class="list-group-item">
+                <%= @movie_theater.city %>, <%= @movie_theater.state %> <%= @movie_theater.zip %>
+              </li>
+              <li class="list-group-item">
+                <%= @movie_theater.phone %>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Screening Rooms
+                <%= link_to screening_rooms_url do %>
+                  <%= icon('fa fa-pencil pull-right') %>
+                <% end %>
+              </h3>
+            </div>
+
+            <ul class="list-group">
+              <% @movie_theater.screening_rooms.each do |room| %>
+              <li class="list-group-item">
+                Theater #<%= room.theater_number %> | <%= room.seat_quantity %> seat capacity
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Types of Tickets
+                <%= link_to ticket_offerings_url do %>
+                  <%= icon('fa fa-pencil pull-right') %>
+                <% end %>
+              </h3>
+            </div>
+            <ul class="list-group">
+              <% @movie_theater.ticket_offerings.each do |ticket| %>
+              <li class="list-group-item">
+                <%= ticket.name %> | <%= number_to_currency(ticket.price) %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Current Movies
+                <%= link_to edit_movie_theater_path(@movie_theater) do %>
+                  <%= icon('fa fa-pencil pull-right') %>
+                <% end %>
+              </h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

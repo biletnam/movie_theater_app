@@ -102,7 +102,7 @@ class BookingsController < ApplicationController
     end
 
     def check_ticket_quantity
-      if Showing.find(@showing_id).amount_of_seats_remaining <= @tickets.values.map(&:to_i).sum
+      if Showing.find(@showing_id).amount_of_seats_remaining < @tickets.values.map(&:to_i).sum
         redirect_to :back, :notice => "Sorry you are trying to purchase more tickets than we have seats remaining, please modify your order."
       elsif @tickets.values.map(&:to_i).sum == 0
         redirect_to :back, :notice => "You did not select any tickets."

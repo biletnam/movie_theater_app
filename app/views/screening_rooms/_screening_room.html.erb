@@ -1,0 +1,6 @@
+<li class="list-group-item">
+  Theater #<%= screening_room.theater_number %> | <%= screening_room.seat_quantity %> seats
+  <%= link_to edit_screening_room_url(screening_room) do %>
+    <%= icon('fa fa-pencil pull-right') %>
+  <% end %>
+</li>
