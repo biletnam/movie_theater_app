@@ -1,19 +1,20 @@
-<div class="row">
-  <div class="col-xs-12 col-md-10 col-md-offset-1">
-    <div class="movie-app-page-header">
-      <h1>Enjoy <%= @booking.movie.name %>!</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <div class="movie-app-page-header">
+        <h1>Enjoy <%= @booking.movie.name %>!</h1>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <h3>Confirmation #<%= @booking.id %></h3>
+      <p>
+        Thank you so much for purchasing tickets online! A copy of this receipt is being emailed to <%= @booking.email %>.
+      </p>
+      <p>The total amount being charged to your card is <%= number_to_currency(@booking.total_cost) %></p>
     </div>
   </div>
 </div>
-<br>
-
-<div class="row">
-  <div class="col-xs-12 col-md-10 col-md-offset-1">
-    <h3>Confirmation Number: <%= @booking.id %></h3>
-    <h4>
-      Thank you so much for purchasing tickets online! A copy of this receipt is being emailed to <%= @booking.email %>.
-    </h4>
-    <h4>The total amount being charged to your card is <%= number_to_currency(@booking.total_cost) %></h4>
-  </div>
-</div>
-

@@ -5,13 +5,13 @@
   <div class="panel-body">
     <% @showing.screening_room.movie_theater.ticket_offerings.each do |ticket_type| %>
     <div class="row">
-      <div class="col-xs-12 col-md-6 text-center">
+      <div class="col-xs-6 col-md-6 text-center">
         <p>
           <strong><%= ticket_type.name %></strong>
         </p>
         <p><%= number_to_currency(ticket_type.price) %> x</p>
       </div>
-      <div class="col-xs-12 col-md-6 text-center">
+      <div class="col-xs-6 col-md-6 text-center">
         <p>
           <strong>Quantity</strong>
         </p>

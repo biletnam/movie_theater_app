@@ -74,8 +74,10 @@ class ShowingsController < ApplicationController
     end
 
     def confirm_tickets_available
-      unless @showing.amount_of_seats_remaining > 0
+      if @showing.amount_of_seats_remaining <= 0
         redirect_to :back, :notice => "Sorry this show is sold out!"
+      elsif @showing.time_slot < Time.current
+        redirect_to :back, :notice => "Purchasing tickets for this show has closed."
       end
       rescue ActionController::RedirectBackError
         redirect_to root_path

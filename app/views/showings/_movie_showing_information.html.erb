@@ -1,9 +1,30 @@
-<%= image_tag @showing.movie.image_url, height: 150 %>
-<h4>
-  <strong><%= @showing.movie.name %></strong>
-</h4>
-<h5>Rated <%= @showing.movie.rating %></h5>
-<h5><%= @showing.time_slot.strftime('%b %d at %I:%M %p') %></h5>
-<h5><%= @showing.screening_room.movie_theater.name %></h5>
-<h5>Theater #<%= @showing.screening_room.theater_number %></h5>
-<h5><em><%= @showing.amount_of_seats_remaining %> seats remaining</em></h5>
+<div class="row hidden-xs">
+  <div class="col-xs-12">
+    <%= image_tag @showing.movie.image_url, height: 150 %>
+    <h4>
+      <strong><%= @showing.movie.name %></strong>
+    </h4>
+    <h5>Rated <%= @showing.movie.rating %></h5>
+    <h5><%= @showing.time_slot.strftime('%b %d at %I:%M %p') %></h5>
+    <h5><%= @showing.screening_room.movie_theater.name %></h5>
+    <h5>Theater #<%= @showing.screening_room.theater_number %></h5>
+    <h5><em><%= @showing.amount_of_seats_remaining %> seats remaining</em></h5>
+  </div>
+</div>
+
+<div class="row visible-xs">
+  <div class="col-xs-4">
+    <%= image_tag @showing.movie.image_url, class: 'img-responsive' %>
+    <h4>
+  </div>
+  <div class="col-xs-8">
+    <h4 class="no-margin-top">
+      <strong><%= link_to @showing.movie.name, @showing.movie %></strong>
+    </h4>
+    <h5>Rated <%= @showing.movie.rating %></h5>
+    <h5><%= @showing.time_slot.strftime('%b %d at %I:%M %p') %></h5>
+    <h5><%= @showing.screening_room.movie_theater.name %></h5>
+    <h5>Theater #<%= @showing.screening_room.theater_number %> | <em><%= @showing.amount_of_seats_remaining %> seats left</em></h5>
+  </div>
+</div>
+<hr/>

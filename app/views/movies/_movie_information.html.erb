@@ -1,0 +1,11 @@
+<div class="col-md-4">
+  <%= image_tag @movie.image_url, class: 'movie-poster' %>
+</div>
+<div class="col-md-8">
+  <h4>
+    <strong><%= @movie.name %> | <small>Rated <%= @movie.rating %></small></strong>
+  </h4>
+  <h5><%= @movie.length_in_minutes %> minutes</h5>
+  <h5><%= @movie.description %></h5>
+  <h5><%= @movie.actors %></h5>
+  <br>

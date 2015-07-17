@@ -1,9 +1,10 @@
+
 <ul class="list-inline dates-list">
   <% @upcoming_dates.each do |day| %>
     <li>
       <%= link_to movie_theater_path(@movie_theater, :day => day) do %>
         <h2 class="date" id="<%= day %>">
-          <% if day === Date.today %>
+          <% if day === Date.current %>
             Today
           <% else %>
             <%= day.strftime("%b %d") %>
@@ -14,6 +15,7 @@
   <% end %>
 </ul>
 <hr/>
+
 
 <script type="text/javascript">
   $( document ).ready(function() {

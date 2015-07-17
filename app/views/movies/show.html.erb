@@ -1,84 +1,19 @@
-<div class="row">
-  <div class="col-xs-12 col-md-10 col-md-offset-1">
-    <div class="movie-app-page-header">
-      <h1><%= @movie.name %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <div class="movie-app-page-header">
+        <h1><%= @movie.name %></h1>
+      </div>
     </div>
   </div>
-</div>
-<br>
-<br>
-<div class="row">
-  <div class="col-xs-12 col-md-10 col-md-offset-1">
-    <div class="row">
-      <div class="col-md-4">
-        <%= image_tag @movie.image_url, class: 'movie-poster' %>
-      </div>
-      <div class="col-md-8">
-        <h4>
-          <strong><%= @movie.name %> | <small>Rated <%= @movie.rating %></small></strong>
-        </h4>
-        <h5><%= @movie.length_in_minutes %> minutes</h5>
-        <h5><%= @movie.description %></h5>
-        <h5><%= @movie.actors %></h5>
-        <br>
-        <h3>Showtimes for Today</h3>
-        <hr/>
-        <div class="row">
-          <div class="col-xs-12">
-            <% @movie.showings.where(:date => Date.today).each do |showing| %>
-            <% if showing.seats_available? %>
-
-            <%= link_to showing, class: "btn btn-lg time-button" do %>
-            <%= showing.time_slot.strftime('%I:%M %p') %>
-            <% end %>
-
-            <% else %>
-
-            <%= link_to showing, class: "btn btn-lg time-button", disabled: "disabled" do %>
-            <%= showing.time_slot.strftime('%I:%M %p') %>
-            <% end %>
-
-            <% end %>
-            <% end %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <h3>
-              <small>
-                <%= link_to "View All Other Showtimes", '#', id: 'other-show-times-link', remote: true %>
-              </small>
-            </h3>
-            <div id="other-show-times">
-              <% @movie.showings.pluck(:date).uniq.each do |date| %>
-              <div class="row">
-                <div class="col-xs-12">
-                  <h3>
-                    <%= date.strftime('%A, %b-%e') %>
-                  </h3>
-                  <hr/>
-                  <% @movie.showings.where(:date => date).each do |showing| %>
-                    <% if showing.seats_available? %>
-
-                      <%= link_to showing, class: "btn btn-lg time-button" do %>
-                        <%= showing.time_slot.strftime('%I:%M %p') %>
-                      <% end %>
-
-                    <% else %>
-
-                      <%= link_to showing, class: "btn btn-lg time-button", disabled: "disabled" do %>
-                        <%= showing.time_slot.strftime('%I:%M %p') %>
-                      <% end %>
-
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-              <br>
-              <br>
-              <% end %>
-            </div>
-          </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <div class="row">
+        <%= render 'movie_information' %>
+          <%= render 'todays_showtimes' %>
+          <%= render 'view_other_showtimes' %>
         </div>
       </div>
     </div>

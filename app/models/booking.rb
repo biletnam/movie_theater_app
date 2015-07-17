@@ -1,7 +1,7 @@
 require 'credit_card_validator'
 
 class Booking < ActiveRecord::Base
-  default_scope { order('created_at ASC') }
+  default_scope { order('created_at DESC') }
 
   has_many :tickets
   belongs_to :showing
@@ -70,7 +70,7 @@ class Booking < ActiveRecord::Base
   def cc_expiration_date
     exp_date = self.cc_exp_yr + self.cc_exp_mon
 
-    unless exp_date.to_i > Date.today.strftime("%Y%m").to_i
+    unless exp_date.to_i > Date.current.strftime("%Y%m").to_i
       errors.add(:cc_exp_yr, "Credit card is expired. Please use a different card.")
     end
   end

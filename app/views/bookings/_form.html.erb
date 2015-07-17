@@ -61,7 +61,7 @@
 </div>
 
 <% if @movie.rating == "R" %>
-  <div class="checkbox">
+  <div class="text-danger checkbox">
     <label>
       <%= f.check_box :buyer_age_confirmed %> This movie is rated R. Please confirm you are over 18 years of age.
     </label>

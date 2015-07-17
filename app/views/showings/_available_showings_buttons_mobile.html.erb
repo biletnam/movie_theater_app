@@ -1,13 +1,13 @@
 <% @showings.where(:movie_id => movie.id).each do |showing| %>
   <% if showing.seats_available? && showing.time_slot > Time.current %>
 
-    <%= link_to showing, class: "btn btn-lg time-button" do %>
+    <%= link_to showing, class: "btn time-button" do %>
       <%= showing.time_slot.strftime('%I:%M %p') %>
     <% end %>
 
   <% else %>
 
-    <%= link_to showing, class: "btn btn-lg time-button", disabled: "disabled" do %>
+    <%= link_to showing, class: "btn time-button", disabled: "disabled" do %>
       <%= showing.time_slot.strftime('%I:%M %p') %>
     <% end %>
 

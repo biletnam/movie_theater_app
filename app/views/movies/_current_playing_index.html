@@ -1,0 +1,38 @@
+<% @movies.each do |movie| %>
+<div class="movie-row hidden-xs col-md-10 col-md-offset-1">
+  <div class="row">
+    <div class="col-md-2">
+      <%= image_tag movie.image_url, class: 'img-responsive' %>
+    </div>
+    <div class="col-md-2">
+      <h2 class="no-margin-top">
+        <%= link_to movie.name.upcase, movie %>
+      </h2>
+      <p>Rated: <%= movie.rating %></p>
+      <p><%= movie.length_in_minutes %> minutes</p>
+    </div>
+    <div class="col-md-8">
+      <p><%= movie.description %></p>
+      <p><em><%= movie.actors %></em></p>
+      <hr/>
+      <%= render 'showings/available_showings_buttons', :@showings => @showings, :movie => movie %>
+    </div>
+  </div>
+</div>
+
+<div class="movie-row visible-xs col-xs-12">
+  <div class="row">
+    <div class="col-xs-4">
+      <%= image_tag movie.image_url, class: 'img-responsive' %>
+    </div>
+    <div class="col-xs-8">
+      <p><%= link_to movie.name.upcase, movie %></p>
+      <p class="no-margin-top">
+        <%= movie.length_in_minutes %> minutes | <em>Rated: <%= movie.rating %></em>
+      </p>
+      <hr/>
+      <%= render 'showings/available_showings_buttons_mobile', :@showings => @showings, :movie => movie %>
+    </div>
+  </div>
+</div>
+<% end %>
