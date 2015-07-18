@@ -17,16 +17,25 @@ This project creates a basic platform that movie theater owners can use to imple
 
 4. <b>showtime:</b> This is one of the important join models of the platform. Connects a movie to a specific screen_room/theater. Has information about time, seating, etc.
 
-5. <b>booking:</b>
-6. <b>ticket:</b>
-7. <b>movie:</b>
+5. <b>booking:</b> This is the other truly important join model in the app. It connects a group of tickets to a specific showtime. It's where we check cc information, user age, etc. It's also where the total price is set and the credit card would be charged. On booking save, that's when we can adjust seating available etc.
+
+6. <b>ticket:</b> Another join model. This is what a user purchases. It has a FK to ticket_offering to determine price, etc. It has a FK to showtime, and an FK to booking. 
+
+7. <b>movie:</b> Has information about the movie. Has many showtimes. Also has many bookings. Could have linked bookings through showtimes, but since we want to run stats on movie revenue, it's a bit easier to just connect it directly.
+
+<b>Creative Decisions Made</b>
+1. The focus of the UX is around showtimes. People search for movies by day, and most frequently want to go see a movie TODAY. That should be a key focus.
+2. The ticket_offerings model creates a lot of complexity in the booking process. But, it is critical to moving the project closer to a usable product. Theaters have matinees, child tickets, senior citizen pricing, etc. This needs to be modeled in, and including in the checkout process.
+3. The theater manager should have a dashboard to update information and view sales stats.
+4. A list of all orders, and orders by movie is important. But some highlight stats may be helpful as well (Total Revenue, Total tickets sold, etc.)
+5. Will use Bootstrap to help with responsive design.
+6. Sold out shows shouldn't just "disappear." It help creates demand, and booking urgency.
+7. On checkout, user should be able to view their total price. Also, inputting CC information should be seamless. Using dropdowns will make it easier on mobile as well.
+8. Instead of writing custom validations for CC information, and email, I will leverage gems who have done this already. May not be perfect, but provides the most amount of protection against bogus orders, upon launch. Once payment processor is hooked in, it will be running the validations anyway.
 
 <b>List of Requirements</b>
 1. Customers should be able to come to the site, see all movies playing with their showtimes.
 2. Remember, seating is limited so a particular showtime should only have a limited number of seats.
-
-
-
 3. Once a show sells out, a customer should no longer be able to buy tick
 4. Also, the theater will be showing R-rated movies so make sure to check the customer's age before purchasing.
 5. They should be able to add tickets for only one movie at a time so don't worry about a shopping cart.
