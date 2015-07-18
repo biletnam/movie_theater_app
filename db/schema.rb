@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715214211) do
+ActiveRecord::Schema.define(version: 20150718164345) do
 
   create_table "bookings", force: :cascade do |t|
     t.string   "name"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20150715214211) do
     t.string   "cc_cvc"
     t.string   "cc_exp_mon"
     t.string   "cc_exp_yr"
-    t.boolean  "buyer_age_confirmed"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.boolean  "buyer_age_confirmed",                           default: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
     t.decimal  "total_cost",          precision: 30, scale: 10
     t.integer  "showing_id"
     t.integer  "movie_id"

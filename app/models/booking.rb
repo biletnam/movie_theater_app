@@ -76,7 +76,7 @@ class Booking < ActiveRecord::Base
   end
 
   def buyer_aged_confirmed
-    if self.showing.movie.rating == "R" && self.buyer_age_confirmed == false
+    if self.movie.rating == "R" && self.buyer_age_confirmed == false
       errors.add(:buyer_age_confirmed, "This movie is rated R. You must confirm your age.")
     end
   end

@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+first:
   name: MyString
-  rating: MyString
+  rating: PG-13
   image_url: MyString
   length_in_minutes: 1
   genre: MyString
   description: MyText
   actors: MyString
 
-two:
+r_rated_movie:
   name: MyString
-  rating: MyString
+  rating: R
   image_url: MyString
   length_in_minutes: 1
   genre: MyString

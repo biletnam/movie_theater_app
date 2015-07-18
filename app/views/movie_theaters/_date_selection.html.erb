@@ -1,13 +1,19 @@
 
 <ul class="list-inline dates-list">
   <% @upcoming_dates.each do |day| %>
-    <li>
+    <li class="text-center">
       <%= link_to movie_theater_path(@movie_theater, :day => day) do %>
         <h2 class="date" id="<%= day %>">
           <% if day === Date.current %>
-            Today
+            Today<br>
+            <small class="no-margin-top">
+              <em>&nbsp </em>
+            </small>
           <% else %>
-            <%= day.strftime("%b %d") %>
+            <%= day.strftime("%b %d") %><br>
+            <small class="no-margin-top">
+              <em><%= day.strftime("%A") %></em>
+            </small>
           <% end %>
         </h2>
       <% end %>

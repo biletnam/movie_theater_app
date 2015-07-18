@@ -12,4 +12,7 @@ class MovieTheater < ActiveRecord::Base
     self.bookings.sum(:total_cost)
   end
 
+  def movies
+  end
+
 end

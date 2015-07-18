@@ -1,21 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  email: MyString
-  cc_number: MyString
-  cc_cvc: MyString
-  cc_exp_mon: MyString
-  cc_exp_yr: MyString
-  buyer_age_confirmed: false
-  total_cost: MyString
+new_booking:
+  name:
+  email:
+  cc_number: 1
+  cc_cvc: 1
+  cc_exp_mon: 1
+  cc_exp_yr: 1
+  buyer_age_confirmed:
+  total_cost:
+  showing: first
+  movie: first
 
-two:
-  name: MyString
-  email: MyString
-  cc_number: MyString
-  cc_cvc: MyString
-  cc_exp_mon: MyString
-  cc_exp_yr: MyString
+existing_booking:
+  name: 'Paul'
+  email: 'pjg5005@gmail.com'
+  cc_number: 4242424242424242
+  cc_cvc: 123
+  cc_exp_mon: "10"
+  cc_exp_yr: "2020"
+  buyer_age_confirmed:
+  total_cost:
+  showing: first
+  movie: first
+
+existing_booking_two:
+  name: 'Paul'
+  email: 'pjg5005@gmail.com'
+  cc_number: 4242424242424242
+  cc_cvc: 123
+  cc_exp_mon: "10"
+  cc_exp_yr: "2020"
   buyer_age_confirmed: false
-  total_cost: MyString
+  total_cost:
+  showing: first
+  movie: r_rated_movie
