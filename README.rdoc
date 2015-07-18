@@ -1,28 +1,41 @@
-== README
+== Movie Theater App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project creates a basic platform that movie theater owners can use to implement online ticketing. The basic requirements are listed below. I will give a brief explanation of how I decided to implement each one.
 
-Things you may want to cover:
+<b>Summary of Goals</b>
+1. Make sure all 14 specific deliverables are addressed and achieved
+2. Build platform with flexibilty in mind. Make sure product is useful enough to hand over to a theater owner, and they could create some customization on their own.
+3. Validations are critical- checking payment info, ticket and seat quantity, etc.
+4. "Showtimes" are the core part of the UX. The "let's go see a movie tonight" experience should be easily addressed.
 
-* Ruby version
+<b>Domain Model and Explanation</b>
+1. <b>movie_theater:</b> Store basic information about the theater itself. Manager should be able to go in and customize: phone number, address, etc. A movie theater object is important for flexibility going forward. In the event other theaters wanted to use this product, all other things will feed from the movie theater class.
 
-* System dependencies
+2. <b>ticket_offering:</b> Slightly beyond the scope of the requirements, but important for flexibilty and usability. Theaters do not sell one ticket type. They have matinee, child, senior, etc. It's important for a theater to be able to manage all their offerings.
 
-* Configuration
+3. <b>screening_room:</b> This is where we manage the amount of tickets that can be sold to a specfic showtime. Also important so the guest knows which theater to go to upon arriving at the theater.
 
-* Database creation
+4. <b>showtime:</b> This is one of the important join models of the platform. Connects a movie to a specific screen_room/theater. Has information about time, seating, etc.
 
-* Database initialization
+5. <b>booking:</b>
+6. <b>ticket:</b>
+7. <b>movie:</b>
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<b>List of Requirements</b>
+1. Customers should be able to come to the site, see all movies playing with their showtimes.
+2. Remember, seating is limited so a particular showtime should only have a limited number of seats.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
+3. Once a show sells out, a customer should no longer be able to buy tick
+4. Also, the theater will be showing R-rated movies so make sure to check the customer's age before purchasing.
+5. They should be able to add tickets for only one movie at a time so don't worry about a shopping cart.
+6. When customers decide to buy their tickets, they should be able to checkout by entering their name, email, credit card, and expiration date.
+7. We want to make sure we don't get any bogus orders, so please keep an eye out for any validations and make sure the user knows if there's a problem with the order.
+8. We'll add a credit card processor later on, so don't integrate with Stripe.
+9. Once the customer purchases their tickets, they should receive an email receipt.
+10. We want to keep track of our sales, so the order information should be saved to the DB.
+11. We'll also want to see all of the orders for each movie.
+12. An index page showing all of the orders (across all movies).
+13. We don't need any authentication on the app
+14. We're not worried about custom visual design, so feel free to use any CSS framework, or roll your own. However, we need the site to work on mobile so keep that in mind.
