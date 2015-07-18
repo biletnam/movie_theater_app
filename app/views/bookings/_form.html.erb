@@ -43,7 +43,7 @@
       <%= f.label :cc_exp_mon, class: "control-label" do %>
         Exp Month
       <% end %>
-      <%= f.select :cc_exp_mon, options_for_select(@months),
+      <%= f.select :cc_exp_mon, options_for_select(set_months),
           {},
           {:class => 'form-control'} %>
     </div>
@@ -53,7 +53,7 @@
       <%= f.label :cc_exp_yr, class: "control-label" do %>
         Exp Year
       <% end %>
-      <%= f.select :cc_exp_yr, options_for_select(@years),
+      <%= f.select :cc_exp_yr, options_for_select(set_years),
           {},
           {:class => 'form-control'} %>
     </div>

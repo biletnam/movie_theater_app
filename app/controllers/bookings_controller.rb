@@ -1,7 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :set_tickets_and_showing, only: [:new, :create]
-  before_action :set_months_years_arrays, only: [:new, :create]
+  before_action :set_other_variables, only: [:new, :create, :check_ticket_quantity]
   before_action :check_ticket_quantity, only: [:new, :create]
   before_action :total_cost, only: [:new, :create]
 
@@ -22,18 +21,15 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.showing_id = @showing_id
-
-
+    @booking.movie_id = @movie.id
 
     respond_to do |format|
       if @booking.save
         @booking.create_tickets(@tickets, @showing_id)
         BookingMailer.receipt(@booking).deliver_now
         format.html { redirect_to @booking }
-        format.json { render :show, status: :created, location: @booking }
       else
         format.html { render :new }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +37,9 @@ class BookingsController < ApplicationController
   def update
     respond_to do |format|
       if @booking.update(booking_params)
-
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
-        format.json { render :show, status: :ok, location: @booking }
       else
         format.html { render :edit }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,7 +48,6 @@ class BookingsController < ApplicationController
     @booking.destroy
     respond_to do |format|
       format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -69,40 +61,15 @@ class BookingsController < ApplicationController
                                       :cc_exp_yr, :buyer_age_confirmed, :total_cost, :tickets, :showing_id)
     end
 
-    def set_months_years_arrays
-      @months =[  ["Jan (01)", "01"],
-                ["Feb (02)", "02"],
-                ["Mar (03)", "03"],
-                ["Apr (04)", "04"],
-                ["May (05)", "05"],
-                ["June (06)", "06"],
-                ["July (07)", "07"],
-                ["Aug (08)", "08"],
-                ["Sep (09)", "09"],
-                ["Oct (10)", "10"],
-                ["Nov (11)", "11"],
-                ["Dec (12)", "12"]
-              ]
-
-      @years =[["2015","2015"],
-            ["2016","2016"],
-            ["2017","2017"],
-            ["2018","2018"],
-            ["2019","2019"],
-            ["2020","2020"],
-            ["2021","2021"],
-            ["2022","2022"],
-            ["2023","2023"]]
-    end
-
-    def set_tickets_and_showing
+    def set_other_variables
       @tickets = params[:tickets]
       @showing_id = params[:showing_id]
-      @movie = Showing.find(@showing_id).movie
+      @showing = Showing.find(@showing_id)
+      @movie = @showing.movie
     end
 
     def check_ticket_quantity
-      if Showing.find(@showing_id).amount_of_seats_remaining < @tickets.values.map(&:to_i).sum
+      if @showing.amount_of_seats_remaining < @tickets.values.map(&:to_i).sum
         redirect_to :back, :notice => "Sorry you are trying to purchase more tickets than we have seats remaining, please modify your order."
       elsif @tickets.values.map(&:to_i).sum == 0
         redirect_to :back, :notice => "You did not select any tickets."
@@ -114,7 +81,6 @@ class BookingsController < ApplicationController
 
     def total_cost
       @total_cost = 0
-
       @tickets.each do |k,v|
         ticket = TicketOffering.find(k)
         @total_cost += (ticket.price * v.to_i)

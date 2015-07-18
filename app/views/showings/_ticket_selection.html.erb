@@ -3,7 +3,7 @@
     <h3 class="panel-title">How many tickets would you like?</h3>
   </div>
   <div class="panel-body">
-    <% @showing.screening_room.movie_theater.ticket_offerings.each do |ticket_type| %>
+    <% @showing.movie_theater.ticket_offerings.each do |ticket_type| %>
     <div class="row">
       <div class="col-xs-6 col-md-6 text-center">
         <p>
