@@ -45,22 +45,18 @@
       <hr/>
       <div class="row">
         <div class="col-md-4">
-          <%= form_tag(  {:controller => :movie_theaters,
-            :action => :sales_dashboard},
-            :method => :get,
-            class: 'form', :remote => true) do %>
-
-          <%= select_tag :movie_filter,
-            content_tag(:option,'All Movies',:value=>"All") +
-            options_from_collection_for_select(Movie.all,
-            'id', 'name', @movie_id.to_s), {:class => 'form-control'} %>
+          <%= form_tag( sales_information_url(@movie_theater), class: 'form', :remote => true) do %>
+            <%= select_tag :movie_filter,
+              content_tag(:option,'All Movies',:value=>"All") +
+              options_from_collection_for_select(Movie.all,
+              'id', 'name', @movie_id.to_s), {:class => 'form-control'} %>
           <% end %>
-
         </div>
       </div>
       <div class="table-responsive">
         <br>
         <%= paginate @bookings %>
+
         <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
@@ -72,16 +68,8 @@
             </tr>
           </thead>
 
-          <tbody>
-            <% @bookings.each_with_index do |booking, n| %>
-              <tr>
-                <td><%= booking.id %></td>
-                <td><%= booking.movie.name %></td>
-                <td><%= booking.tickets.count %></td>
-                <td><%= number_to_currency(booking.total_cost) %></td>
-                <td><%= booking.email %></td>
-              </tr>
-            <% end %>
+          <tbody id="bookings-list">
+            <%= render @bookings %>
           </tbody>
         </table>
         <%= paginate @bookings %>
@@ -93,7 +81,12 @@
 <script type="text/javascript">
   $( document ).ready(function() {
     $('#movie_filter').change(function() {
-      this.form.submit();
+      $.ajax({
+          url: '/sales_information/<%= @movie_theater.id %>',
+          type: 'GET',
+          dataType: 'script',
+          data: {movie_filter: $('#movie_filter').val()}
+        })
     });
   });
 </script>

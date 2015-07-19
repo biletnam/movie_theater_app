@@ -1,1 +1,3 @@
-alert('howdy');
+$("#bookings-list").hide();
+$("#bookings-list").html("<%= j render(:partial => @bookings) %>");
+$("#bookings-list").fadeIn('slow');
