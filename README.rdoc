@@ -31,6 +31,15 @@ This project creates a basic platform that movie theater owners can use to imple
 5. Will use Bootstrap to help with responsive design.
 6. Sold out shows shouldn't just "disappear." It help creates demand and booking urgency.
 7. On checkout, user should be able to view their total price. Also, inputting CC information should be seamless. Using dropdowns will make it easier on mobile.
+
+<b>Some Development Decisions Made</b>
+1. I purposely decided to not have any nested resources. There were some potential opportunities for it, but wanted to make sure there was enough flexibilty going forward. For example, given the current requirements, a booking could have been nested under showtime. However, if we ever moved to a shopping cart concept, and a user could be multiple tickets to multiple movies, that would become an issue. A screening_room definitely could be nested under movie theater, but just something I have no refactored yet.
+2. I had to hack together ticket creation, given the UX I desired. A user first selects the number of each type of ticket they want. I then store that information in a hash and pass it to the next screen (booking/new). On that screen, I basically re-submit that hash in the form with hidden fields. Once I know CC information is valid, and the booking is saved, then the ticket objects from the hash get created.
+3. I am trying to work on writing tests, so I wrote a few for the booking model (to check CC validations). It's something I would like to build upon.
+4. I was having trouble writing a custom scope (one that you pass a lambda), in order to check what day a showtime is (not the day and time). As a hack, I created a seperate column in the showtime field that just stores the day. I know this is bad, but it works for now. Something I will go back and improve.
+5. Just used gmail for mailers. Have rollbar set up to track production errors.
+6. Set the time of the app to use CST. Simplifies some of the design and the logic for now.
+7. Have not really included AJAX yet to make filtering a bit smoother. That's garnish, so didn't spend too much time focusing on it at this point.
 8. Instead of writing custom validations for CC information, and email, I will leverage gems who have done this already. They may not be perfect, but they provide the most amount of protection against bogus orders, upon launch. Once payment processor is hooked in, it will probably be running the validations anyway.
 
 <b>List of Requirements (Provided by LPL)</b>
