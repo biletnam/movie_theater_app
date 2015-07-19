@@ -7,10 +7,10 @@ class MovieTheatersController < ApplicationController
   def sales_dashboard
     if params[:movie_filter].present? && params[:movie_filter] != "All"
       @movie_id = params[:movie_filter]
-      @bookings = @movie_theater.bookings.where(:movie_id => params[:movie_filter]).page(params[:page]).per(15)
+      @bookings = @movie_theater.bookings.where(:movie_id => params[:movie_filter])
     else
       @movie_id = "All"
-      @bookings = @movie_theater.bookings.page(params[:page]).per(15)
+      @bookings = @movie_theater.bookings
     end
 
     respond_to do |format|
