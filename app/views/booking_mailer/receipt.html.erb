@@ -1,7 +1,11 @@
 <h2>We hope you enjoy the movie!</h2>
 
 <p>
-  This email is a confirmation of recent your purchase to go see <%= @booking.movie.name %>. Your confirmation number is <%= @booking.id %>.
+  This email is a confirmation of your recent purchase to go see <%= @booking.movie.name %>. Your confirmation number is <%= @booking.id %>.
+</p>
+
+<p>
+  The show is <%= @booking.showing.time_slot.strftime('%b %e, %I:%M %p') %>. It will be playing in Theater #<%= @booking.showing.screening_room.theater_number %>.
 </p>
 
 <p>
