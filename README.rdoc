@@ -1,6 +1,8 @@
 == Movie Theater App
 
-This project creates a basic platform that movie theater owners can use to implement online ticketing. The basic requirements are listed below. I will give a brief explanation of how I decided to implement each one.
+This project creates a basic platform that movie theater owners can use to implement online ticketing. There were 14 basic requirements included in the prompt (I have listed them at the end). I will walk through a high level summary of my goals, a description of the domain model, some UX/UI considerations, and a few decisions I made in development.
+
+FOR TESTING PURPOSES, 4242424242424242 is included as a valid CC number.
 
 <b>Summary of Goals</b>
 1. Make sure all 14 specific deliverables are addressed and achieved
