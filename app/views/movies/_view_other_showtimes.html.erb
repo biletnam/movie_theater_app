@@ -6,32 +6,34 @@
       </small>
     </h3>
     <div id="other-show-times">
-      <% @movie.showings.pluck(:date).uniq.each do |date| %>
-      <div class="row">
-        <div class="col-xs-12">
-          <h3>
-            <%= date.strftime('%A, %b-%e') %>
-          </h3>
-          <hr/>
-          <% @movie.showings.where(:date => date).each do |showing| %>
-            <% if showing.seats_available? %>
+      <% @movie.showings.upcoming_shows.pluck(:date).uniq.each do |date| %>
+        <% unless date == Date.current %>
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                <%= date.strftime('%A, %b-%e') %>
+              </h3>
+              <hr/>
+              <% @movie.showings.where(:date => date).each do |showing| %>
+                <% if showing.seats_available? %>
 
-              <%= link_to showing, class: "btn btn-lg time-button" do %>
-                <%= showing.time_slot.strftime('%I:%M %p') %>
+                  <%= link_to showing, class: "btn btn-lg time-button" do %>
+                    <%= showing.time_slot.strftime('%I:%M %p') %>
+                  <% end %>
+
+                <% else %>
+
+                  <%= link_to showing, class: "btn btn-lg time-button", disabled: "disabled" do %>
+                    <%= showing.time_slot.strftime('%I:%M %p') %>
+                  <% end %>
+
+                <% end %>
               <% end %>
-
-            <% else %>
-
-              <%= link_to showing, class: "btn btn-lg time-button", disabled: "disabled" do %>
-                <%= showing.time_slot.strftime('%I:%M %p') %>
-              <% end %>
-
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <br>
-      <br>
+            </div>
+          </div>
+          <br>
+          <br>
+        <% end %>
       <% end %>
     </div>
   </div>

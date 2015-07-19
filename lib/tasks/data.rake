@@ -1,4 +1,16 @@
 namespace :data do
+
+  desc 'checks to see if show was yesterday'
+
+  task upcoming_show_check: :environment do
+    Showing.all.each do |show|
+      if show.time_slot.to_date < Date.current
+        show.is_show_upcoming = false
+        show.save
+      end
+    end
+  end
+
   desc "seed data for heroku"
 
   task seed: :environment do

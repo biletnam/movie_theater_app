@@ -13,7 +13,7 @@ class Booking < ActiveRecord::Base
   validate :cc_expiration_date
   validate :buyer_aged_confirmed
 
-  before_save :set_movie_id, :set_last_4_digits
+  before_save :set_last_4_digits
 
   def create_tickets(tickets, showing_id)
     tickets.each do |k,v|
@@ -48,10 +48,6 @@ class Booking < ActiveRecord::Base
     end
     self.total_cost = total_cost
     self.save(:validate => false)
-  end
-
-  def set_movie_id
-    self.movie_id = showing.movie_id
   end
 
   def set_last_4_digits

@@ -1,5 +1,6 @@
 class Showing < ActiveRecord::Base
   default_scope { order('time_slot ASC') }
+  scope :upcoming_shows, -> { where( is_show_upcoming: true ) }
 
   belongs_to :screening_room
   has_one :movie_theater, :through => :screening_room
