@@ -24,7 +24,7 @@ class MovieTheatersController < ApplicationController
     @movie_theater = MovieTheater.first
 
     @day = params[:day] || Time.current.to_date
-    @upcoming_dates = (Time.current.to_date..(Time.current + 6.days)).map{ |date| date }
+    @upcoming_dates = (Time.current.to_date..(Time.current.to_date + 6.days)).map{ |date| date }
     @showings = @movie_theater.showings.where(:date => @day)
     @movies = Movie.find(@showings.pluck(:movie_id))
   end
